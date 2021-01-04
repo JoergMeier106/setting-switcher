@@ -10,7 +10,7 @@
 	"publisher": "JrgMeier",
 	"displayName": "Setting Switcher",
 	"description": "With this extension it is possible to define different workspace setting variables and then easily switch between them.",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"engines": {
 		"vscode": "^1.30.0"
 	},

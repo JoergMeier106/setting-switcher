@@ -1,4 +1,4 @@
-# setting-switcher README
+# Setting Switcher
 
 With this extension it is possible to manage different custom settings in groups. Only one group is active at a time. The active group can be selected via the status bar. This allows to change settings for different scenarios.
 
@@ -19,9 +19,3 @@ If you want to access for example the current "Setting1" use the variable:
 ${config.switchSettings.current.Setting1}
 
 However, this is just an example and any group and setting names are possible.
-
-## Release Notes
-
-### 1.0.0
-
-Initial release
