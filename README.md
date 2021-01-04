@@ -16,7 +16,7 @@ Switch the current setting group via the status bar.
 The object "switchSettings.current" will be added/changed after switching the current group.
 
 If you want to access for example the current "Setting1" use the variable:
-${config.switchSettings.current.Setting1}
+${config:switchSettings.current.Setting1}
 
 However, this is just an example and any group and setting names are possible.
 
