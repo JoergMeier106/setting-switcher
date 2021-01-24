@@ -16,6 +16,17 @@ Switch the current setting group via the status bar.
 The object "switchSettings.current" will be added/changed after switching the current group.
 
 If you want to access for example the current "Setting1" use the variable:
-${config:switchSettings.current.Setting1}
+${config:switchSettings.current.Setting1}. However, this is just an example and any group and setting names are possible.  
 
-However, this is just an example and any group and setting names are possible.
+### Create Multiple Switcher
+
+If you need to switch more than one setting, you can use the list switchSettings.switcherGroups to create multiple switcher groups. The following example shows how it is possible to switch between CustomSetting1 and CustomSetting2 as well as between CustomSetting3 and CustomSetting4 and CustomSetting5 and CustomSetting6. Note that the use of "switchSettings.settings" is not necessary here and all switcher groups can also be defined only under "switchSettings.switcherGroups".
+![feature defining_groups](images/switcher_group_example.png)
+
+For each group a status bar item is created and displayed.
+![feature defining_groups](images/switcher_group_status_bar_example.png)
+
+The currently selected settings of the switcher groups are numerated under "config:switchSettings.current". ![feature defining_groups](images/switcher_group_current_example.png)
+
+If you want to access for example the current "Setting3" use the variable:
+${config:switchSettings.current.1.Setting3}
