@@ -7,30 +7,34 @@ const CURRENT_OBJECT_KEY = 'current';
 
 let statusBarItem: vscode.StatusBarItem;
 
-function getCurrentSetting(state: vscode.Memento) : string {
-	let currentSetting = state.get<string>(CURRENT_SETTING_KEY)!;
+function storedSettingKeyIsValid(settingKey: string | undefined) : boolean {
+	const settingKeys = Object.keys(vscode.workspace.getConfiguration(SETTINGS_CONFIG_NAME).settings);
+	return settingKey !== undefined && settingKeys.includes(settingKey);
+}
 
-	if (currentSetting === undefined){
-		const settingKeys = Object.keys(vscode.workspace.getConfiguration(SETTINGS_CONFIG_NAME).settings);
-		if (settingKeys.length > 0){
+function getCurrentSetting(state: vscode.Memento) : string | undefined {
+	let currentSetting = state.get<string>(CURRENT_SETTING_KEY)!;
+	const settingKeys = Object.keys(vscode.workspace.getConfiguration(SETTINGS_CONFIG_NAME).settings);
+
+	if (!storedSettingKeyIsValid(currentSetting)) {
+		if (settingKeys.length > 0) {
 			currentSetting = settingKeys[0];
 			state.update(CURRENT_SETTING_KEY, currentSetting);
-		}
-		else{
-			currentSetting = "";		
+		} else {
+			return undefined;
 		}
 	}
 	return currentSetting;
 }
 
-async function updateCurrentSetting (currentSetting: string | undefined) {	
-	if (currentSetting !== undefined){
+async function updateCurrentSetting (currentSetting: string | undefined) {		
+	if (currentSetting !== undefined) {
 		let settings = vscode.workspace.getConfiguration(SETTINGS_CONFIG_NAME);
 		let currentSettingObject = settings.settings[currentSetting];
 		await settings.update(CURRENT_OBJECT_KEY, currentSettingObject, vscode.ConfigurationTarget.Workspace);
 
 		statusBarItem.text = currentSetting;
-	}  
+	}
 }
 
 async function switchSetting(context: vscode.ExtensionContext) {
